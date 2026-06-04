@@ -19,7 +19,7 @@ public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int member_id;
+    private Long member_id;
 
     @Column(nullable = false)
     private String name;
@@ -27,8 +27,11 @@ public class Member extends BaseEntity{
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String phone;
+
+    @Column(nullable = false)
+    private String address;
 
     @Column
     private LocalDate memberShipDate;
