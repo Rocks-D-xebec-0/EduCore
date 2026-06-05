@@ -1,4 +1,4 @@
-package com.hem.EduCore.dto;
+package com.hem.EduCore.dto.Reponse;
 
 import lombok.Data;
 
