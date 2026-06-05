@@ -1,8 +1,8 @@
 package com.hem.EduCore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hem.EduCore.dto.CreateMemberDto;
-import com.hem.EduCore.dto.MemberResponseDto;
+import com.hem.EduCore.dto.Request.CreateMemberDto;
+import com.hem.EduCore.dto.Reponse.MemberResponseDto;
 import com.hem.EduCore.exception.DuplicateResourceException;
 import com.hem.EduCore.service.impl.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
