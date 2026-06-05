@@ -18,11 +18,11 @@ import java.util.Set;
 @Table(name = "books")
 public class Book extends BaseEntity{
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int book_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long book_id;
 
-@Column(nullable = false)
+    @Column(nullable = false)
     private  String title;
     @Column(nullable = false)
 
@@ -33,6 +33,8 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
 
     private  String pages ;
+
+    private  boolean isDeleted;
 
 
 
@@ -51,7 +53,7 @@ public class Book extends BaseEntity{
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-private  Set<Category> categories = new HashSet<>();
+    private  Set<Category> categories = new HashSet<>();
 
 
 
