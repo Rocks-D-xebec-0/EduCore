@@ -2,42 +2,47 @@ package com.hem.EduCore.mapper;
 
 import com.hem.EduCore.dto.Reponse.BookResponseDto;
 import com.hem.EduCore.dto.Request.CreateBookDto;
+import com.hem.EduCore.entity.Author;
 import com.hem.EduCore.entity.Book;
-import com.hem.EduCore.entity.Member;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class BookMapper {
 
-    public Book toEntity(CreateBookDto request){
-
+    public Book toEntity(CreateBookDto request) {
         Book book = new Book();
-
         book.setTitle(request.getTitle());
+        book.setIsbn(request.getIsbn());
         book.setDescription(request.getDescription());
-        book.setPages(request.getPages());
-
-
-        return  book ;
-
-
-
+        book.setPublisher(request.getPublisher());
+        book.setPublishedYear(request.getPublishedYear());
+        book.setAvailableCopies(request.getAvailableCopies());
+        return book;
     }
 
+    public BookResponseDto toResponseDto(Book book) {
+        BookResponseDto dto = new BookResponseDto();
+        dto.setId(book.getBook_id());
+        dto.setTitle(book.getTitle());
+        dto.setIsbn(book.getIsbn());
+        dto.setDescription(book.getDescription());
+        dto.setPublisher(book.getPublisher());
+        dto.setPublishedYear(book.getPublishedYear());
+        dto.setAvailableCopies(book.getAvailableCopies());
 
+        book.getCategories().stream().findFirst().ifPresent(c -> {
+            dto.setCategoryId(c.getCategory_id());
+            dto.setCategoryName(c.getName());
+        });
 
-     public BookResponseDto toResponseDto(Book book ){
+        dto.setAuthorNames(
+            book.getAuthors().stream()
+                .map(Author::getName)
+                .collect(Collectors.toList())
+        );
 
-        BookResponseDto bookResponseDto=new BookResponseDto();
-
-        bookResponseDto.setId(book.getBook_id());
-        bookResponseDto.setTitle(book.getTitle());
-        bookResponseDto.setDescription(bookResponseDto.getDescription());
-         bookResponseDto.setPublicationYear(book.getPublicationYear());
-         bookResponseDto.setPages(book.getPages());
-
-         return  bookResponseDto;
-
-
-     }
+        return dto;
+    }
 }
