@@ -12,6 +12,6 @@ public interface BookService {
     BookResponseDto createBook(CreateBookDto request);
     BookResponseDto getBookById(Long id );
     Page<BookResponseDto> getAllBooks(Pageable pageable);
-    void softDeleteBook(Long id);
+    void deleteBook(Long id);
     BookResponseDto updateBook(Long id, UpdateBookDto request );
 }

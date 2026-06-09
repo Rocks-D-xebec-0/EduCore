@@ -98,12 +98,16 @@ public  ResponseEntity<Page<BookResponseDto>> getAllBooks(
         return  ResponseEntity.ok(bookService.getAllBooks(pageable));
 }
 
-//
-//@DeleteMapping
-//            public  ResponseEntity<>    softDeleteBook(
-//                    @PathVariable Long id
-//            ){
-//        return  ResponseEntity.ok(bookService.softDeleteBook(id));
-//            }
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a book", description = "Hard-deletes the book if no loan history exists; otherwise soft-deletes it")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Book deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Book not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

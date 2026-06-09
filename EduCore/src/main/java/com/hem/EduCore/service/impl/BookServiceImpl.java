@@ -7,6 +7,7 @@ import com.hem.EduCore.dto.Request.UpdateBookDto;
 import com.hem.EduCore.entity.Book;
 import com.hem.EduCore.mapper.BookMapper;
 import com.hem.EduCore.repository.BookRepository;
+import com.hem.EduCore.repository.LoanRepository;
 import com.hem.EduCore.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ public class BookServiceImpl implements BookService {
 
     private  final BookMapper bookMapper;
     private  final BookRepository bookRepository;
+    private  final LoanRepository loanRepository;
 
 
     @Override
@@ -53,18 +55,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void softDeleteBook(Long id) {
-
-        Book book
-=        bookRepository.findById(id)
+    public void deleteBook(Long id) {
+        Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
 
-
-book.setDeleted(true);
-
-bookRepository.save(book);
-
-
+        if (loanRepository.existsByBook(book)) {
+            book.setDeleted(true);
+            bookRepository.save(book);
+        } else {
+            bookRepository.delete(book);
+        }
     }
 
     @Override
