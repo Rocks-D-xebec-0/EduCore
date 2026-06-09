@@ -20,9 +20,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(ActiveLoanConflictException.class)
+    public ResponseEntity<Map<String, String>> handleActiveLoansConflict(ActiveLoanConflictException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        error.put("status", "409");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, String>> handleResourceNotFoundException(RuntimeException ex) {
-        if (ex.getMessage().contains("Not found")) {
+        if (ex.getMessage() != null && ex.getMessage().contains("Not found")) {
             Map<String, String> error = new HashMap<>();
             error.put("message", ex.getMessage());
             error.put("status", "404");

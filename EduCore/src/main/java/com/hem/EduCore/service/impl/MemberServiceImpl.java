@@ -1,8 +1,8 @@
 package com.hem.EduCore.service.impl;
 
 
-import com.hem.EduCore.dto.CreateMemberDto;
-import com.hem.EduCore.dto.MemberResponseDto;
+import com.hem.EduCore.dto.Request.CreateMemberDto;
+import com.hem.EduCore.dto.Reponse.MemberResponseDto;
 import com.hem.EduCore.entity.Member;
 import com.hem.EduCore.exception.DuplicateResourceException;
 import com.hem.EduCore.mapper.MemberMapper;

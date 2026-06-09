@@ -1,9 +1,8 @@
 package com.hem.EduCore.controller;
 
 
-import com.hem.EduCore.dto.CreateMemberDto;
-import com.hem.EduCore.dto.MemberResponseDto;
-import com.hem.EduCore.service.MemberService;
+import com.hem.EduCore.dto.Request.CreateMemberDto;
+import com.hem.EduCore.dto.Reponse.MemberResponseDto;
 import com.hem.EduCore.service.impl.MemberServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -31,11 +30,17 @@ public class MemberController {
 
 
     @PostMapping()
-    @Operation(summary = "Create a new member", description = "Register a new member in the library system")
+    @Operation(summary = "Create a new member",
+            description = "Register a new member in the library system")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Member created successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MemberResponseDto.class))),
-        @ApiResponse(responseCode = "400", description = "Invalid input or duplicate email"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
+        @ApiResponse(responseCode = "201",
+                description = "Member created successfully",
+                content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = MemberResponseDto.class))),
+        @ApiResponse(responseCode = "400",
+                description = "Invalid input or duplicate email"),
+        @ApiResponse(responseCode = "500",
+                description = "Internal server error")
     })
     public ResponseEntity<MemberResponseDto> createMember(
             @Valid @RequestBody CreateMemberDto request
@@ -48,7 +53,8 @@ public class MemberController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get member by ID", description = "Retrieve a member's information by their ID")
+    @Operation(summary = "Get member by ID",
+            description = "Retrieve a member's information by their ID")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Member found",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = MemberResponseDto.class))),

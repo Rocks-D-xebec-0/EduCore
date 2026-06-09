@@ -19,7 +19,7 @@ public class Author extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int author_id;
+    private Long author_id;
 
     @Column(nullable = false)
     private String name;
