@@ -18,7 +18,7 @@ public class Loan extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int loan_id;
+    private Long loan_id;
 
     @Column(nullable = false)
     private LocalDate borrowDate;
