@@ -7,5 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
-    boolean existsByBook(Book book);
+
+    boolean existsByBookAndReturnDateIsNull(Book book);
+
+    boolean existsByBookAndReturnDateIsNotNull(Book book);
 }

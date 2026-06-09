@@ -23,18 +23,24 @@ public class Book extends BaseEntity{
     private Long book_id;
 
     @Column(nullable = false)
-    private  String title;
+    private String title;
+
+    @Column(nullable = false, unique = true)
+    private String isbn;
+
+    @Column
+    private String description;
+
+    @Column
+    private String publisher;
+
+    @Column
+    private String publishedYear;
+
     @Column(nullable = false)
+    private int availableCopies = 1;
 
-    private  String description ;
-    @Column(nullable = false)
-
-    private  String publicationYear ;
-    @Column(nullable = false)
-
-    private  String pages ;
-
-    private  boolean isDeleted;
+    private boolean isDeleted;
 
 
 
