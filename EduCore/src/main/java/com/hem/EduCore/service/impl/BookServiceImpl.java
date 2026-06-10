@@ -1,12 +1,13 @@
 package com.hem.EduCore.service.impl;
 
-import com.hem.EduCore.dto.Reponse.BookResponseDto;
+import com.hem.EduCore.dto.Response.BookResponseDto;
 import com.hem.EduCore.dto.Request.CreateBookDto;
 import com.hem.EduCore.dto.Request.UpdateBookDto;
 import com.hem.EduCore.entity.Book;
 import com.hem.EduCore.entity.Category;
 import com.hem.EduCore.exception.ActiveLoanConflictException;
 import com.hem.EduCore.exception.DuplicateResourceException;
+import com.hem.EduCore.exception.ResourceNotFoundException;
 import com.hem.EduCore.mapper.BookMapper;
 import com.hem.EduCore.repository.BookRepository;
 import com.hem.EduCore.repository.CategoryRepository;
@@ -35,7 +36,7 @@ public class BookServiceImpl implements BookService {
         }
 
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         Book book = bookMapper.toEntity(request);
         book.getCategories().add(category);
@@ -47,7 +48,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponseDto getBookById(Long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found"));
         return bookMapper.toResponseDto(book);
     }
 
@@ -64,7 +65,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBook(Long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found"));
 
         if (loanRepository.existsByBookAndReturnDateIsNull(book)) {
             throw new ActiveLoanConflictException("Cannot delete book with active loans");
@@ -81,14 +82,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponseDto updateBook(Long id, UpdateBookDto request) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found"));
 
         if (bookRepository.existsByIsbnAndNotId(request.getIsbn(), id)) {
             throw new DuplicateResourceException("Book with ISBN " + request.getIsbn() + " already exists");
         }
 
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         book.setTitle(request.getTitle());
         book.setIsbn(request.getIsbn());

@@ -2,9 +2,10 @@ package com.hem.EduCore.service.impl;
 
 
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
 import com.hem.EduCore.entity.Member;
 import com.hem.EduCore.exception.DuplicateResourceException;
+import com.hem.EduCore.exception.ResourceNotFoundException;
 import com.hem.EduCore.mapper.MemberMapper;
 import com.hem.EduCore.repository.MemberRepository;
 import com.hem.EduCore.service.MemberService;
@@ -46,7 +47,7 @@ public class MemberServiceImpl  implements MemberService {
     @Override
     public MemberResponseDto getMemberById(Long id) {
 
-        Member member=memberRepository.findById(id).orElseThrow(() -> new RuntimeException("Member Not found "));
+        Member member=memberRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Member not found"));
 
         return  memberMapper.toResponseDto(member);
 
