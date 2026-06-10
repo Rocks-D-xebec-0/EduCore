@@ -11,4 +11,5 @@ module EduCore {
     requires io.swagger.v3.oas.annotations;
     requires spring.boot.autoconfigure;
     requires io.github.cdimascio.dotenv.java;
+    requires spring.tx;
 }
