@@ -2,7 +2,7 @@ package com.hem.EduCore.mapper;
 
 
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
 import com.hem.EduCore.entity.Member;
 import org.springframework.stereotype.Component;
 

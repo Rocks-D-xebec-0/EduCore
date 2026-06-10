@@ -2,7 +2,7 @@ package com.hem.EduCore.controller;
 
 
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
 import com.hem.EduCore.service.impl.MemberServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

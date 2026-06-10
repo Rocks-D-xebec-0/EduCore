@@ -1,6 +1,6 @@
 package com.hem.EduCore.mapper;
 
-import com.hem.EduCore.dto.Reponse.BookResponseDto;
+import com.hem.EduCore.dto.Response.BookResponseDto;
 import com.hem.EduCore.dto.Request.CreateBookDto;
 import com.hem.EduCore.entity.Author;
 import com.hem.EduCore.entity.Book;

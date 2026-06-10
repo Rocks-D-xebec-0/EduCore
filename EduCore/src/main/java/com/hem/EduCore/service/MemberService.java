@@ -1,7 +1,7 @@
 package com.hem.EduCore.service;
 
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.Pageable;
