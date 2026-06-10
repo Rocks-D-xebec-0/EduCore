@@ -1,7 +1,8 @@
 package com.hem.EduCore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hem.EduCore.dto.Reponse.BookResponseDto;
+import com.hem.EduCore.dto.Response.BookResponseDto;
+import com.hem.EduCore.exception.ResourceNotFoundException;
 import com.hem.EduCore.dto.Request.CreateBookDto;
 import com.hem.EduCore.dto.Request.UpdateBookDto;
 import com.hem.EduCore.exception.ActiveLoanConflictException;
@@ -131,7 +132,7 @@ class BookControllerTest {
     @DisplayName("GET /api/books/{id} should return 404 when book not found")
     void getBookById_notFound_returns404() throws Exception {
         when(bookService.getBookById(99L))
-                .thenThrow(new RuntimeException("Book Not found"));
+                .thenThrow(new ResourceNotFoundException("Book not found"));
 
         mockMvc.perform(get("/api/books/99"))
                 .andExpect(status().isNotFound());
@@ -177,7 +178,7 @@ class BookControllerTest {
     @DisplayName("PUT /api/books/{id} should return 404 when book not found")
     void updateBook_notFound_returns404() throws Exception {
         when(bookService.updateBook(eq(99L), any(UpdateBookDto.class)))
-                .thenThrow(new RuntimeException("Book Not found"));
+                .thenThrow(new ResourceNotFoundException("Book not found"));
 
         mockMvc.perform(put("/api/books/99")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -209,7 +210,7 @@ class BookControllerTest {
     @Test
     @DisplayName("DELETE /api/books/{id} should return 404 when book not found")
     void deleteBook_notFound_returns404() throws Exception {
-        doThrow(new RuntimeException("Book Not found")).when(bookService).deleteBook(99L);
+        doThrow(new ResourceNotFoundException("Book not found")).when(bookService).deleteBook(99L);
 
         mockMvc.perform(delete("/api/books/99"))
                 .andExpect(status().isNotFound());

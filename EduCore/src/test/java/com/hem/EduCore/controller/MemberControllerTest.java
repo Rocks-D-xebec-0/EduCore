@@ -2,7 +2,8 @@ package com.hem.EduCore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
+import com.hem.EduCore.exception.ResourceNotFoundException;
 import com.hem.EduCore.exception.DuplicateResourceException;
 import com.hem.EduCore.service.impl.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -111,7 +112,7 @@ class MemberControllerTest {
     @DisplayName("GET /api/members/{id} should return 404 when member not found")
     void testGetMemberByIdReturns404() throws Exception {
         when(memberService.getMemberById(999L))
-            .thenThrow(new RuntimeException("Member Not found"));
+            .thenThrow(new ResourceNotFoundException("Member not found"));
 
         mockMvc.perform(get("/api/members/999"))
             .andExpect(status().isNotFound());

@@ -1,7 +1,7 @@
 package com.hem.EduCore.service;
 
 import com.hem.EduCore.dto.Request.CreateMemberDto;
-import com.hem.EduCore.dto.Reponse.MemberResponseDto;
+import com.hem.EduCore.dto.Response.MemberResponseDto;
 import com.hem.EduCore.entity.Member;
 import com.hem.EduCore.repository.MemberRepository;
 import com.hem.EduCore.service.impl.MemberServiceImpl;

@@ -1,6 +1,6 @@
 package com.hem.EduCore.service;
 
-import com.hem.EduCore.dto.Reponse.BookResponseDto;
+import com.hem.EduCore.dto.Response.BookResponseDto;
 import com.hem.EduCore.dto.Request.CreateBookDto;
 import com.hem.EduCore.dto.Request.UpdateBookDto;
 import com.hem.EduCore.entity.Book;
